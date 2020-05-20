@@ -89,6 +89,19 @@ open class Highlightr {
     }
 
     /**
+     Set the theme to use for highlighting.
+
+     - parameter to: Theme SupportedTheme
+
+     - returns: true if it was possible to set the given theme, false otherwise
+     */
+    @discardableResult
+    open func setTheme(to theme: SupportedTheme) -> Bool {
+        let name = theme.rawValue
+        return setTheme(to: name)
+    }
+
+    /**
      Takes a String and returns a NSAttributedString with the given language highlighted.
 
      - parameter code:           Code to highlight.
@@ -129,6 +142,19 @@ open class Highlightr {
         }
 
         return returnString
+    }
+
+    /**
+     Takes a String and returns a NSAttributedString with the given language highlighted.
+
+     - parameter code:           Code to highlight.
+     - parameter language:       SupportedLanguage. Set to `nil` to use auto detection.
+     - parameter fastRender:     Defaults to true - When *true* will use the custom made html parser rather than Apple's solution.
+
+     - returns: NSAttributedString with the detected code highlighted.
+     */
+    open func highlight(_ code: String, as language: SupportedLanguage? = nil, fastRender: Bool = true) -> NSAttributedString? {
+        return highlight(code, as: language?.rawValue, fastRender: fastRender)
     }
 
     /**
